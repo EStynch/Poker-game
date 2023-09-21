@@ -1,7 +1,7 @@
-import PokerGame from "./assets/components/PokerGame";
+import PokerGame from "./components/PokerGame";
 
-function App() {
+const App = () => {
   return <PokerGame />;
-}
+};
 
 export default App;
