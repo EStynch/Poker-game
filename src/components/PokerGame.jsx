@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const deck = [
   "2 Spades",
   "2 Hearts",
@@ -62,6 +64,11 @@ const deckShuffle = (deck) => {
 };
 
 const PokerGame = () => {
+  const [deckState, setDeckState] = useState(deckShuffle([...deck]));
+  const [players, setPlayers] = useState([
+    { id: 1, name: "Player 1", hand: [] },
+    { id: 2, name: "Player 2", hand: [] },
+  ]);
   return (
     <>
       <h1>TeachTown Poker Game</h1>
