@@ -1,58 +1,58 @@
 import { useState } from "react";
 
 const deck = [
-  "2 Spades",
-  "2 Hearts",
-  "2 Diamonds",
-  "2 Clubs",
-  "3 Spades",
-  "3 Hearts",
-  "3 Diamonds",
-  "3 Clubs",
-  "4 Spades",
-  "4 Hearts",
-  "4 Diamonds",
-  "4 Clubs",
-  "5 Spades",
-  "5 Hearts",
-  "5 Diamonds",
-  "5 Clubs",
-  "6 Spades",
-  "6 Hearts",
-  "6 Diamonds",
-  "6 Clubs",
-  "7 Spades",
-  "7 Hearts",
-  "7 Diamonds",
-  "7 Clubs",
-  "8 Spades",
-  "8 Hearts",
-  "8 Diamonds",
-  "8 Clubs",
-  "9 Spades",
-  "9 Hearts",
-  "9 Diamonds",
-  "9 Clubs",
-  "10 Spades",
-  "10 Hearts",
-  "10 Diamonds",
-  "10 Clubs",
-  "Jack Spades",
-  "Jack Hearts",
-  "Jack Diamonds",
-  "Jack Clubs",
-  "Queen Spades",
-  "Queen Hearts",
-  "Queen Diamonds",
-  "Queen Clubs",
-  "King Spades",
-  "King Hearts",
-  "King Diamonds",
-  "King Clubs",
-  "Ace Spades",
-  "Ace Hearts",
-  "Ace Diamonds",
-  "Ace Clubs",
+  "2 of Spades",
+  "2 of Hearts",
+  "2 of Diamonds",
+  "2 of Clubs",
+  "3 of Spades",
+  "3 of Hearts",
+  "3 of Diamonds",
+  "3 of Clubs",
+  "4 of Spades",
+  "4 of Hearts",
+  "4 of Diamonds",
+  "4 of Clubs",
+  "5 of Spades",
+  "5 of Hearts",
+  "5 of Diamonds",
+  "5 of Clubs",
+  "6 of Spades",
+  "6 of Hearts",
+  "6 of Diamonds",
+  "6 of Clubs",
+  "7 of Spades",
+  "7 of Hearts",
+  "7 of Diamonds",
+  "7 of Clubs",
+  "8 of Spades",
+  "8 of Hearts",
+  "8 of Diamonds",
+  "8 of Clubs",
+  "9 of Spades",
+  "9 of Hearts",
+  "9 of Diamonds",
+  "9 of Clubs",
+  "10 of Spades",
+  "10 of Hearts",
+  "10 of Diamonds",
+  "10 of Clubs",
+  "Jack of Spades",
+  "Jack of Hearts",
+  "Jack of Diamonds",
+  "Jack of Clubs",
+  "Queen of Spades",
+  "Queen of Hearts",
+  "Queen of Diamonds",
+  "Queen of Clubs",
+  "King of Spades",
+  "King of Hearts",
+  "King of Diamonds",
+  "King of Clubs",
+  "Ace of Spades",
+  "Ace of Hearts",
+  "Ace of Diamonds",
+  "Ace of Clubs",
 ];
 
 const deckShuffle = (deck) => {
@@ -70,7 +70,7 @@ const PokerGame = () => {
     { id: 2, name: "Player 2", hand: [] },
   ]);
 
-  const dealHands = () => {
+  const deal = () => {
     const newDeck = [...deckState];
 
     const updatedPlayers = players.map((player, index) => {
@@ -86,7 +86,17 @@ const PokerGame = () => {
   return (
     <>
       <h1>TeachTown Poker Game</h1>
-      <h2>{deck}</h2>
+      <button onClick={deal}>Deal Cards</button>
+      {players.map((player) => (
+        <div key={player.id}>
+          <h2>{player.name}'s Hand:</h2>
+          <ul>
+            {player.hand.map((card, index) => (
+              <li key={index}>{card}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </>
   );
 };
