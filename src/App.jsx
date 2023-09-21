@@ -1,5 +1,5 @@
 import PokerGame from "./components/PokerGame";
-import "./components/styles.css";
+import "./styles.css";
 
 const App = () => {
   return <PokerGame />;

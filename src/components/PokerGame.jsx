@@ -90,11 +90,11 @@ const PokerGame = () => {
       {players.map((player) => (
         <div key={player.id}>
           <h2>{player.name}'s Hand:</h2>
-          <ul>
+          <ol>
             {player.hand.map((card, index) => (
               <li key={index}>{card}</li>
             ))}
-          </ul>
+          </ol>
         </div>
       ))}
     </>
