@@ -69,6 +69,20 @@ const PokerGame = () => {
     { id: 1, name: "Player 1", hand: [] },
     { id: 2, name: "Player 2", hand: [] },
   ]);
+
+  const dealHands = () => {
+    const newDeck = [...deckState];
+
+    const updatedPlayers = players.map((player, index) => {
+      const hand = newDeck.slice(index * 5, (index + 1) * 5);
+      newDeck.splice(index * 5, 5);
+
+      return { ...player, hand };
+    });
+
+    setPlayers(updatedPlayers);
+    setDeckState(newDeck);
+  };
   return (
     <>
       <h1>TeachTown Poker Game</h1>
