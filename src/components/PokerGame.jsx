@@ -63,12 +63,20 @@ const deckShuffle = (deck) => {
   return deck;
 };
 
+const rankHand = (hand) => {
+  return hand.map((card) => {
+    const cardValue = parseInt(card);
+    return isNaN(cardValue) ? 0 : cardValue;
+  });
+};
+
 const PokerGame = () => {
   const [deckState, setDeckState] = useState(deckShuffle([...deck]));
   const [players, setPlayers] = useState([
     { id: 1, name: "Player 1", hand: [] },
     { id: 2, name: "Player 2", hand: [] },
   ]);
+  const [winner, setWinner] = useState(null);
 
   const deal = () => {
     const newDeck = [...deckState];
@@ -82,14 +90,36 @@ const PokerGame = () => {
 
     setPlayers(updatedPlayers);
     setDeckState(newDeck);
+    setWinner(null);
+    determineWinner(updatedPlayers);
   };
+
+  const determineWinner = (playersIncluded) => {
+    const playerHands = playersIncluded.map((player) => {
+      const ranks = rankHand(player.hand);
+      return { player, ranks };
+    });
+
+    const winningHand = playerHands.reduce((prev, current) => {
+      for (let i = 0; i < prev.ranks.length; i++) {
+        if (prev.ranks[i] > current.ranks[i]) {
+          return prev;
+        } else if (prev.ranks[i] < current.ranks[i]) {
+          return current;
+        }
+      }
+      return prev;
+    });
+    setWinner(winningHand.player);
+  };
+
   return (
     <>
       <h1>TeachTown Poker Game</h1>
       <button onClick={deal}>Deal Cards</button>
       {players.map((player) => (
         <div key={player.id}>
-          <h2>{player.name}'s Hand:</h2>
+          <h2>{player.name}</h2>
           <ol>
             {player.hand.map((card, index) => (
               <li key={index}>{card}</li>
@@ -97,6 +127,11 @@ const PokerGame = () => {
           </ol>
         </div>
       ))}
+      {winner && (
+        <div>
+          <h2>{winner.name} is the winner!</h2>
+        </div>
+      )}
     </>
   );
 };
